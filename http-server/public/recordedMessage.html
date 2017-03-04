@@ -86,50 +86,34 @@
     <article>
         <header style="text-align: center;">
             <h1>
-                RecordRTC | WebRTC Audio+Video+Screen Recording
+                Record Message
             </h1>
-            <p style="margin:0;margin-bottom:-30px;">
-                <a href="https://www.webrtc-experiment.com/">HOME</a>
-                <span> &copy; </span>
-                <a href="http://www.MuazKhan.com/" target="_blank">Muaz Khan</a> .
-                <a href="http://twitter.com/WebRTCWeb" target="_blank" title="Twitter profile for WebRTC Experiments">@WebRTCWeb</a> .
-                <a href="https://github.com/muaz-khan?tab=repositories" target="_blank" title="Github Profile">Github</a> .
-                <a href="https://github.com/muaz-khan/RecordRTC/issues?state=open" target="_blank">Latest issues</a> .
-                <a href="https://github.com/muaz-khan/RecordRTC/commits/master" target="_blank">What's New?</a>
-
-                <br>
-
-                <a href="https://www.npmjs.com/package/recordrtc"><img src="https://img.shields.io/npm/v/recordrtc.svg"></a>
-                <a href="https://www.npmjs.com/package/recordrtc"><img src="https://img.shields.io/npm/dm/recordrtc.svg"></a>
-                <a href="https://travis-ci.org/muaz-khan/RecordRTC"><img src="https://travis-ci.org/muaz-khan/RecordRTC.png?branch=master"></a>
-            </p>
+        
         </header>
-
-        <div class="github-stargazers"></div>
 
         <section class="experiment recordrtc">
             <h2 class="header">
-                <select class="recording-media">
+                <select class="recording-media" hidden>
                     <option value="record-audio-plus-video">Microphone+Camera</option>
                     <option value="record-audio">Microphone</option>
                     <option value="record-screen">Full Screen</option>
                     <option value="record-audio-plus-screen">Microphone+Screen</option>
                 </select>
 
-                <span style="font-size: 15px;">into</span>
-
-                <select class="media-container-format">
+<!--                 <span style="font-size: 15px;">into</span>
+ -->
+                <select class="media-container-format" hidden>
                     <option>vp8</option>
-                    <option>vp9</option>
+<!--                     <option>vp9</option>
                     <option>h264</option>
                     <option>opus</option>
                     <option>pcm</option>
                     <option>gif</option>
-                    <option>whammy</option>
+                    <option>whammy</option> -->
                 </select>
 
-                <input type="checkbox" id="chk-MultiStreamRecorder" style="margin:0;width:auto;">
-                <label for="chk-MultiStreamRecorder" style="font-size: 15px;margin:0;width: auto;cursor: pointer;-webkit-user-select:none;user-select:none;">All cameras?</label>
+                <input type="checkbox" id="chk-MultiStreamRecorder" style="margin:0;width:auto;" hidden>
+                <label for="chk-MultiStreamRecorder" style="font-size: 15px;margin:0;width: auto;cursor: pointer;-webkit-user-select:none;user-select:none;" hidden></label>
 
                 <br>
 
@@ -137,14 +121,14 @@
                 <button id="btn-pause-recording" style="display: none; font-size: 15px;">Pause</button>
 
                 <hr style="border-top: 0;border-bottom: 1px solid rgb(189, 189, 189);margin: 4px -12px;margin-top: 8px;">
-                <select class="media-resolutions">
+                <select class="media-resolutions" hidden>
                     <option value="default">Default resolutions</option>
                     <option value="1920x1080">1080p</option>
                     <option value="1280x720">720p</option>
                     <option value="3840x2160">4K Ultra HD (3840x2160)</option>
                 </select>
 
-                <select class="media-framerates">
+                <select class="media-framerates" hidden>
                     <option value="default">Default framerates</option>
                     <option value="5">5 fps</option>
                     <option value="15">15 fps</option>
@@ -153,7 +137,7 @@
                     <option value="60">60 fps</option>
                 </select>
 
-                <select class="media-bitrates">
+<!--                 <select class="media-bitrates">
                     <option value="default">Default bitrates</option>
                     <option value="8000000000">1 GB bps</option>
                     <option value="800000000">100 MB bps</option>
@@ -161,15 +145,15 @@
                     <option value="800000">100 KB bps</option>
                     <option value="8000">1 KB bps</option>
                     <option value="800">100 Bytes bps</option>
-                </select>
+                </select> -->
             </h2>
 
             <div style="text-align: center; display: none;">
-                <button id="save-to-disk">Save To Disk</button>
-                <button id="upload-to-php">Upload to PHP</button>
-                <button id="open-new-tab">Open New Tab</button>
+                <button id="save-to-disk">Send Message</button>
+<!--                 <button id="upload-to-php" hidden>Upload to PHP</button>
+                <button id="open-new-tab" hidden>Open New Tab</button> -->
 
-                <div style="margin-top: 10px;">
+<!--                 <div style="margin-top: 10px;">
                     <span id="signinButton" class="pre-sign-in">
                       <span
                         class="g-signin"
@@ -181,7 +165,7 @@
                     </span>
 
                     <button id="upload-to-youtube" style="vertical-align:top;">Upload to YouTube</button>
-                </div>
+                </div> -->
             </div>
 
             <div style="margin-top: 10px;">
@@ -348,36 +332,36 @@
                     recorderType = null;
                     type = 'video';
                 }
-                if(mediaContainerFormat.value === 'vp9') {
-                    mimeType = 'video/webm\;codecs=vp9';
-                    fileExtension = 'webm';
-                    recorderType = null;
-                    type = 'video';
-                }
-                if(mediaContainerFormat.value === 'pcm') {
-                    mimeType = 'audio/wav';
-                    fileExtension = 'wav';
-                    recorderType = StereoAudioRecorder;
-                    type = 'audio';
-                }
-                if(mediaContainerFormat.value === 'opus') {
-                    mimeType = 'audio/webm';
-                    fileExtension = 'webm'; // ogg or webm?
-                    recorderType = null;
-                    type = 'audio';
-                }
-                if(mediaContainerFormat.value === 'whammy') {
-                    mimeType = 'video/webm';
-                    fileExtension = 'webm';
-                    recorderType = WhammyRecorder;
-                    type = 'video';
-                }
-                if(mediaContainerFormat.value === 'gif') {
-                    mimeType = 'image/gif';
-                    fileExtension = 'gif';
-                    recorderType = GifRecorder;
-                    type = 'gif';
-                }
+                // if(mediaContainerFormat.value === 'vp9') {
+                //     mimeType = 'video/webm\;codecs=vp9';
+                //     fileExtension = 'webm';
+                //     recorderType = null;
+                //     type = 'video';
+                // }
+                // if(mediaContainerFormat.value === 'pcm') {
+                //     mimeType = 'audio/wav';
+                //     fileExtension = 'wav';
+                //     recorderType = StereoAudioRecorder;
+                //     type = 'audio';
+                // }
+                // if(mediaContainerFormat.value === 'opus') {
+                //     mimeType = 'audio/webm';
+                //     fileExtension = 'webm'; // ogg or webm?
+                //     recorderType = null;
+                //     type = 'audio';
+                // }
+                // if(mediaContainerFormat.value === 'whammy') {
+                //     mimeType = 'video/webm';
+                //     fileExtension = 'webm';
+                //     recorderType = WhammyRecorder;
+                //     type = 'video';
+                // }
+                // if(mediaContainerFormat.value === 'gif') {
+                //     mimeType = 'image/gif';
+                //     fileExtension = 'gif';
+                //     recorderType = GifRecorder;
+                //     type = 'gif';
+                // }
                 if(recordingMedia.value === 'record-audio') {
                     captureAudio(commonConfig);
                     button.mediaCapturedCallback = function() {
@@ -694,13 +678,13 @@
             }
             var videoBitsPerSecond;
             function setVideoBitrates() {
-                var select = document.querySelector('.media-bitrates');
-                var value = select.value;
-                if(value == 'default') {
-                    videoBitsPerSecond = null;
-                    return;
-                }
-                videoBitsPerSecond = parseInt(value);
+                // var select = document.querySelector('.media-bitrates');
+                // var value = select.value;
+                // if(value == 'default') {
+                videoBitsPerSecond = null;
+                return;
+                // }
+                // videoBitsPerSecond = parseInt(value);
             }
             function getFrameRates(mediaConstraints) {
                 if(!mediaConstraints.video) {
@@ -1418,11 +1402,11 @@
             };
         </script>
 
-        <section class="experiment" style="padding: 10px 20px;">
+<!--         <section class="experiment" style="padding: 10px 20px;">
             You can try <a href="https://chrome.google.com/webstore/detail/recordrtc/ndcljioonkecdnaaihodjgiliohngojp">a chrome extension for screen recording</a> as well!
-        </section>
+        </section> -->
 
-        <section class="experiment" id="other-demos">
+ <!--        <section class="experiment" id="other-demos">
             <h2 class="header">
                 <a href="#other-demos">Other Demos</a>
             </h2>
@@ -1522,23 +1506,17 @@
                 </tr>
             </tbody>
             </table>
-        </section>
+        </section> -->
 
-        <section class="experiment own-widgets">
-            <h2 class="header" id="updates" style="color: red; padding-bottom: .1em;"><a href="https://github.com/muaz-khan/RecordRTC/issues" target="_blank">RecordRTC Issues</a>
-            </h2>
-            <div id="github-issues"></div>
-        </section>
-
-        <section id="ask" class="experiment">
+<!--         <section id="ask" class="experiment">
             <h2 class="header" id="feedback">Feedback</h2>
             <div>
                 <textarea id="message" style="border: 1px solid rgb(189, 189, 189); height: 8em; margin: .2em; outline: none; resize: vertical; width: 98%;" placeholder="Have any message? Suggestions or something went wrong?"></textarea>
             </div>
             <button id="send-message" style="font-size: 1em;">Send Message</button>
             <small style="margin-left: 1em;">Enter your email too; if you want "direct" reply!</small>
-        </section>
-
+        </section> -->
+<!-- 
         <section class="experiment">
             <h2 class="header">Using RecordRTC...</h2>
 
@@ -1571,29 +1549,7 @@
             <p style="margin-top: 0;">
                 You can even control buffer-size, sample-rates, video-resolutions, bit-rates etc.
             </p>
-        </section>
-
-        <section class="experiment">
-            <p style="margin-top: 0;">
-                RecordRTC is MIT licensed on Github! <a href="https://github.com/muaz-khan/RecordRTC" target="_blank">Documentation</a>
-            </p>
-        </section>
-
-        <section class="experiment own-widgets latest-commits">
-            <h2 class="header" id="updates" style="color: red; padding-bottom: .1em;"><a href="https://github.com/muaz-khan/RecordRTC/commits/master" target="_blank">Latest Updates</a>
-            </h2>
-            <div id="github-commits"></div>
-        </section>
-    </article>
-
-    <a href="https://github.com/muaz-khan/RecordRTC" class="fork-left"></a>
-
-    <footer>
-        <p>
-            <a href="https://www.webrtc-experiment.com/">WebRTC Experiments</a> © <a href="https://plus.google.com/+MuazKhan" rel="author" target="_blank">Muaz Khan</a>
-            <a href="mailto:muazkh@gmail.com" target="_blank">muazkh@gmail.com</a>
-        </p>
-    </footer>
+        </section> -->
 
     <!-- commits.js is useless for you! -->
     <script>
