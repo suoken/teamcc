@@ -2,15 +2,13 @@
 
 <html lang="en"> 
 	<head> 
-		<meta charset="UTF-8"> 
-		<title>Document</title>
-		<link rel="stylesheet" href="css/main.css"> 
+		<script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.min.js"></script>
+		<script src="https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js"></script>
 	</head> 
 
 	<body>
-		<div class="booth"> 
-			<video id="video" width="400" height="300" autoplay> </video>
-		</div>
+<button id="btn-open-room">Open Room</button>
+<button id="btn-join-room">Join Room</button><hr>
 		<script src="js/video.js"></script> 
 	</body> 
 
