@@ -1,25 +1,32 @@
-(function() {
-// self invovked function 
-	var video = document.getElementById('video'),
-		// store url api here. 
-		vendorUrl = window.URL || window.webkitURL;
+var connection = new RTCMultiConnection();
 
-		// namespace to get media
-		navigator.getMedia = navigator.getUserMedia || 
-							 navigator.webkitGetUserMedia ||
-							 navigator.mozGetUserMedia || 
-							 navigator.msGetUserMedia; 
+// this line is VERY_important
+connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
 
-		// Capture video. Method that gets media
-	navigator.getMedia({
-		video: true, 
-		audio: false
-		// successful 
-	}, function(stream) {
-		video.src = vendorUrl.createObjectURL(stream); // source to video element
-		video.play(); 
-	}, function(error) {
-		// An error occured 
-		// error code
-	}); 
-})();
+// all below lines are optional; however recommended.
+
+connection.session = {
+    audio: true,
+    video: true
+};
+
+connection.sdpConstraints.mandatory = {
+    OfferToReceiveAudio: true,
+    OfferToReceiveVideo: true
+};
+
+connection.onstream = function(event) {
+    document.body.appendChild( event.mediaElement );
+};
+
+var predefinedRoomId = 'YOUR_Name';
+
+document.getElementById('btn-open-room').onclick = function() {
+    this.disabled = true;
+    connection.open( predefinedRoomId );
+};
+
+document.getElementById('btn-join-room').onclick = function() {
+    this.disabled = true;
+    connection.join( predefinedRoomId );
+};
