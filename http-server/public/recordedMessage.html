@@ -115,7 +115,12 @@
                 <input type="checkbox" id="chk-MultiStreamRecorder" style="margin:0;width:auto;" hidden>
                 <label for="chk-MultiStreamRecorder" style="font-size: 15px;margin:0;width: auto;cursor: pointer;-webkit-user-select:none;user-select:none;" hidden></label>
 
-                <br>
+                <!-- <br> -->
+
+                            
+            <div style="margin-top: 10px;">
+                <video controls muted></video>
+            </div>
 
                 <button id="btn-start-recording">Start Recording</button>
                 <button id="btn-pause-recording" style="display: none; font-size: 15px;">Pause</button>
@@ -152,8 +157,8 @@
                 <button id="save-to-disk">Send Message</button>
 <!--                 <button id="upload-to-php" hidden>Upload to PHP</button>
                 <button id="open-new-tab" hidden>Open New Tab</button> -->
-
-<!--                 <div style="margin-top: 10px;">
+<!-- 
+                <div style="margin-top: 10px;">
                     <span id="signinButton" class="pre-sign-in">
                       <span
                         class="g-signin"
@@ -166,10 +171,6 @@
 
                     <button id="upload-to-youtube" style="vertical-align:top;">Upload to YouTube</button>
                 </div> -->
-            </div>
-
-            <div style="margin-top: 10px;">
-                <video controls muted></video>
             </div>
         </section>
 
@@ -836,7 +837,8 @@
                 setMediaContainerFormat(['WAV']);
             }
             function saveToDiskOrOpenNewTab(recordRTC) {
-                var fileName = 'RecordRTC-' + (new Date).toISOString().replace(/:|\./g, '-') + '.' + fileExtension;
+                // var fileName = 'RecordRTC-' + (new Date).toISOString().replace(/:|\./g, '-') + '.' + fileExtension;
+                var fileName = 'video1' + '.' + fileExtension;
                 recordingDIV.querySelector('#save-to-disk').parentNode.style.display = 'block';
                 recordingDIV.querySelector('#save-to-disk').onclick = function() {
                     if(!recordRTC) return alert('No recording found.');
